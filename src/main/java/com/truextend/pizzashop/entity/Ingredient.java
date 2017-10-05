@@ -14,18 +14,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ingredient")
-public class Ingredient implements Serializable {
-	@Id
-	@GeneratedValue
-	@Column(name = "ingredient_id")
-	private Integer ingredientId;
-	
-	@Column(name = "name")
-	private String name;
-	
-	@Column(name = "description")
-	private String description;
+public class Ingredient extends Aggregated implements Serializable {	
 	
 	@ManyToMany(cascade = {CascadeType.ALL}, mappedBy="ingredients")
 	private Set<Pizza> pizzas = new HashSet<>();
+
+	public Set<Pizza> getPizzas() {
+		return pizzas;
+	}		
 }
