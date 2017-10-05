@@ -15,8 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -54,8 +53,8 @@ public class Order implements Serializable {
 	@Column(name = "quantity")
 	private Integer quantity;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	@ManyToOne
+	@JoinColumn(name="pizza_id")
 	private Pizza pizza;
 					
 	@ManyToMany(cascade = {CascadeType.ALL})
@@ -131,11 +130,7 @@ public class Order implements Serializable {
 
 	public Pizza getPizza() {
 		return pizza;
-	}
-
-	public void setPizza(Pizza pizza) {
-		this.pizza = pizza;
-	}
+	}	
 
 	public Set<Aggregated> getOrderItems() {
 		return orderItems;

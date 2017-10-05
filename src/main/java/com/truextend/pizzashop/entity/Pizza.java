@@ -9,8 +9,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 
@@ -20,8 +22,8 @@ import javax.persistence.JoinColumn;
 public class Pizza implements Serializable {
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
-	protected Integer id;
+	@Column(name = "pizza_id")
+	protected Integer pizzaId;
 	
 	@Column(name = "name")
 	protected String name;
@@ -41,12 +43,15 @@ public class Pizza implements Serializable {
 	)
 	private Set<Ingredient> ingredients = new HashSet<>();
 	
-	public Integer getId() {
-		return id;
+	@OneToMany(mappedBy="pizza", cascade=CascadeType.ALL)	
+	private Set<Order> orders;
+	
+	public Integer getPizzaId() {
+		return pizzaId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setPizzaId(Integer pizzaId) {
+		this.pizzaId = pizzaId;
 	}
 
 	public String getName() {

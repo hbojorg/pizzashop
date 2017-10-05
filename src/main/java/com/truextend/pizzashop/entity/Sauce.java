@@ -14,12 +14,12 @@ public class Sauce extends Aggregated implements Serializable {
 	
 	@Column(name = "type")
 	private String type;
-	
-	@ManyToOne
-	@JoinColumn(name="pizza_id")
-	private Pizza pizza;
 
-	public Pizza getPizza() {
-		return pizza;
+	public String getType() {
+		return type;
 	}
+
+	public void setType(String type) {
+		this.type = type;
+	}	
 }
