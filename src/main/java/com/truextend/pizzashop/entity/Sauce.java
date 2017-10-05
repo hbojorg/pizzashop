@@ -1,5 +1,7 @@
 package com.truextend.pizzashop.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "sauce")
-public class Sauce {
+public class Sauce implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
