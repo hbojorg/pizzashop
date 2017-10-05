@@ -3,7 +3,6 @@ package com.truextend.pizzashop.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -23,5 +22,4 @@ public class PizzaController {
 		response.add("Hawaiana");
 		return response;
 	}
-
 }

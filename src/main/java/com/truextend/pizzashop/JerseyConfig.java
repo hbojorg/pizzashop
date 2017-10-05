@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import com.truextend.pizzashop.controller.PizzaController;
 
 @Configuration
-@ApplicationPath("api")
+@ApplicationPath("api/v1")
 public class JerseyConfig extends ResourceConfig {
 	public JerseyConfig() {
 		
