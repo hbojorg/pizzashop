@@ -1,5 +1,8 @@
 package com.truextend.pizzashop.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,13 +12,16 @@ public abstract class Aggregated {
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
-	private Integer id;
+	protected Integer id;
 	
 	@Column(name = "name")
-	private String name;
+	protected String name;
 	
 	@Column(name = "description")
-	private String description;
+	protected String description;
+	
+	@ManyToMany(cascade = {CascadeType.ALL}, mappedBy="orderItems")
+	protected Set<Order> orders = new HashSet<>();
 	
 	public Integer getId() {
 		return id;

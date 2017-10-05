@@ -2,19 +2,27 @@ package com.truextend.pizzashop.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "order_pizza")
+@Table(name = "order_of_pizza")
 public class Order implements Serializable {		
 	@Id
 	@GeneratedValue
@@ -35,6 +43,27 @@ public class Order implements Serializable {
 	
 	@Column(name = "price_total")
 	private Integer priceTotal;
+	
+	@Column(name = "slices")
+	private Integer slices;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "size")
+	private Size size;
+	
+	@Column(name = "quantity")
+	private Integer quantity;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Pizza pizza;
+					
+	@ManyToMany(cascade = {CascadeType.ALL})
+	@JoinTable(name="OrderItem", 
+		joinColumns = { @JoinColumn(name="order_id")}, inverseJoinColumns = {@JoinColumn(name="item_id")}
+	)
+	private Set<Aggregated> orderItems = new HashSet<>();
+	
 	
 	public Integer getId() {
 		return id;
@@ -74,6 +103,42 @@ public class Order implements Serializable {
 
 	public void setPriceTotal(Integer priceTotal) {
 		this.priceTotal = priceTotal;
+	}	
+
+	public Integer getSlices() {
+		return slices;
+	}
+
+	public void setSlices(Integer slices) {
+		this.slices = slices;
+	}
+
+	public Size getSize() {
+		return size;
+	}
+
+	public void setSize(Size size) {
+		this.size = size;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public Pizza getPizza() {
+		return pizza;
+	}
+
+	public void setPizza(Pizza pizza) {
+		this.pizza = pizza;
+	}
+
+	public Set<Aggregated> getOrderItems() {
+		return orderItems;
 	}
 
 	public static enum Status {
@@ -81,5 +146,12 @@ public class Order implements Serializable {
 	    INPROGRESS,
 	    COMPLETED,
 	    DELIVERED;	    
-	}	
+	}
+	
+	public static enum Size {
+	    PERSONAL,
+	    SMALL,
+	    MEDIUM,
+	    LARGE;	    
+	}
 }

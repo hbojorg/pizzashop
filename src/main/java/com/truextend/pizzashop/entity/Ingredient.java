@@ -15,11 +15,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ingredient")
 public class Ingredient extends Aggregated implements Serializable {	
+	@Column(name = "deleted")
+	private Boolean deleted;
 	
 	@ManyToMany(cascade = {CascadeType.ALL}, mappedBy="ingredients")
 	private Set<Pizza> pizzas = new HashSet<>();
 
 	public Set<Pizza> getPizzas() {
 		return pizzas;
-	}		
+	}
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}	
 }
