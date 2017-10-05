@@ -5,8 +5,11 @@ This project was implemented with spring boot
 ## Architecture of the Restful application
 
 Application based on the following levels:
+
 	- Rest controllers / resources : Jersey
-	- Services / business logic : Spring  
+	
+	- Services / business logic : Spring
+	  
 	- Repositories / data access layer: JPA, Hibernate
 	
 At the level of the "Rest controllers" has been respected with RESTful principles: 1. use HTTP, 2. defined resources, 3. HTTP defined verbs, 4. Hypermedia Controls
